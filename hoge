@@ -1,0 +1,40 @@
+version: "3.3"
+
+services:
+    app:
+        build:
+            context: ./docker/app
+            dockerfile: Dockerfile
+        tty: true
+        stdin_open: true
+        container_name: agpluss_server
+        working_dir: /agpluss
+        ports: 
+            - "6060:6060"
+        volumes:
+            - .:/agpluss
+            - ~/.cache:/root/.cache
+            - .:go/src/agpluss
+            - $GOPATH/pkg/mod:go/pkg/mod
+        environment:
+            - GO111MODULE=on
+        depends_on: 
+            - db
+        links: 
+            - db
+        # command:
+     
+    db:
+        image: mysql:5.7
+        restart: always
+        container_name: agpluss_db
+        tty: true
+        stdin_open: true
+        volumes:
+            - ./data/mysql:/var/lib/mysql
+        ports: 
+            - "3306:3306"
+        environment: 
+            MYSQL_DATABASE: agpluss
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+        command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
