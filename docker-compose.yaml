@@ -6,7 +6,7 @@ services:
         restart: always
         container_name: agpluss_mysql
         tty: true
-        stdin_open: true
+        stdin_open: true 
         volumes:
             - ./data/mysql:/var/lib/mysql
         ports:
@@ -18,13 +18,13 @@ services:
 
     app:
         # image: golang:latest
-        build:
-            context: .
-            dockerfile: ./docker/app/Dockerfile
+        build: .
+            # context: ./docker/app/
+            # dockerfile: Dockerfile
         tty: true
         stdin_open: true
         privileged: true
-        container_name: agpluss_app
+        # container_name: agpluss_app
         working_dir: /agpluss
         ports:
             - 6060:6060
@@ -32,10 +32,27 @@ services:
             - ~/.cache:/root/.cache
             - .:/go/src/agpluss
             - $GOPATH/pkg/mod:/go/pkg/mod
+            - .:/agpluss
         environment:
             - GO111MODULE=on
         depends_on:
             - mysql
         links:
             - mysql
-        # command: make migrate/up
+        # command: 
+             # sudo apt-get update
+             # sudo apt-get install -y mysql-client
+             # go get -u bitbucket.org/liamstask/goose/cmd/goose
+             # make migrate/up
+        # command: make migrate-up 
+    
+    migrate:
+        build:
+            context: ./db
+            dockerfile: Dockerfile
+        working_dir: /agpluss
+        volumes:
+            - .:/agpluss
+        depends_on: 
+            - mysql
+        command: make migrate-up
