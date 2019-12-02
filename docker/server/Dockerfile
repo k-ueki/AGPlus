@@ -16,4 +16,3 @@ WORKDIR /go/src/AGPluss
 
 # RUN go build
 
-ENTRYPOINT ["echo","hello"]
