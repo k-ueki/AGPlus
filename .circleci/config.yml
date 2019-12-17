@@ -1,8 +1,8 @@
-version: 2.1
+version: 2
 jobs: 
     build:
         docker:
-            - image: cirlceci/node:4.8.2
+            - image: "apline"
 
         steps: 
             - checkout
