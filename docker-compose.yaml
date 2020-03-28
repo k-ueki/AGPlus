@@ -16,15 +16,14 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
-    app:
-        # image: golang:latest
-        build: .
-            # context: ./docker/app/
-            # dockerfile: Dockerfile
+    server:
+        build: 
+            context: ./docker/server/
+            dockerfile: Dockerfile
         tty: true
         stdin_open: true
         privileged: true
-        # container_name: agpluss_app
+        container_name: agpluss_server
         working_dir: /agpluss
         ports:
             - 6060:6060
@@ -39,13 +38,23 @@ services:
             - mysql
         links:
             - mysql
-        # command: 
-             # sudo apt-get update
-             # sudo apt-get install -y mysql-client
-             # go get -u bitbucket.org/liamstask/goose/cmd/goose
-             # make migrate/up
-        # command: make migrate-up 
     
+    front:
+        # image: node:latest
+        build: 
+            context: ./docker/front
+            dockerfile: Dockerfile
+        tty: true
+        stdin_open: true
+        privileged: true
+        container_name: agpluss_front
+        working_dir: /app
+        ports: 
+            - "8081:8080"
+        volumes:
+            - ./:/app
+        command: yarn run serve --port 8080
+
     migrate:
         build:
             context: ./db
