@@ -10,7 +10,7 @@ RUN apt-get install -y apt-utils
 RUN apt-get install -y vim
 RUN apt-get install -y git
 RUN go get bitbucket.org/liamstask/goose/cmd/goose
-RUN git clone https://github.com/k-ueki/AGPluss.git
+#RUN git clone https://github.com/k-ueki/AGPluss.git
 
 WORKDIR /go/src/AGPluss
 
