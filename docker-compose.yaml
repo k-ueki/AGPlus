@@ -52,7 +52,6 @@ services:
         volumes:
             - ./:/agpluss
         command: yarn run serve --port 8080
-#        command: npm run serve --port 8080
 
     migrate:
         build:
