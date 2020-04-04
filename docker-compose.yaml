@@ -4,7 +4,7 @@ services:
     mysql: 
         image: mysql:5.7
         restart: always
-        container_name: agpluss_mysql
+        container_name: agplus_mysql
         tty: true
         stdin_open: true 
         volumes:
@@ -12,7 +12,7 @@ services:
         ports:
             - "3306:3306"
         environment:
-            MYSQL_DATABASE: agpluss
+            MYSQL_DATABASE: agplus
             MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
@@ -21,14 +21,14 @@ services:
         tty: true
         stdin_open: true
         privileged: true
-        working_dir: /agpluss
+        working_dir: /agplus
         ports:
             - "6060:6060"
         volumes:
             - ~/.cache:/root/.cache
-            - .:/go/src/agpluss
+            - .:/go/src/agplus
             - $GOPATH/pkg/mod:/go/pkg/mod
-            - .:/agpluss
+            - .:/agplus
         environment:
             - GO111MODULE=on
         depends_on:
@@ -40,26 +40,26 @@ services:
         build:
             context: .
             dockerfile: ./docker/front/Dockerfile
-        container_name: agpluss_front
+        container_name: agplus_front
         tty: true
         stdin_open: true
         privileged: true
-        working_dir: /agpluss
+        working_dir: /agplus
         ports:
             - "8081:8080"
         depends_on:
           - server
         volumes:
-            - ./:/agpluss
+            - ./:/agplus
         command: yarn run serve --port 8080
 
     migrate:
         build:
             context: ./db
             dockerfile: Dockerfile
-        working_dir: /agpluss
+        working_dir: /agplus
         volumes:
-            - .:/agpluss
+            - .:/agplus
         depends_on: 
             - mysql
         command: make migrate-up
