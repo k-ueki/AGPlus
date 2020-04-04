@@ -1,18 +1,14 @@
 <template>
   <div id="app">
-    <Index></Index>
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Index from './components/Index.vue'
-// import ClassList from './components/ClassList.vue'
 
 export default {
   name: 'app',
   components: {
-    Index,
-    // ClassList
   }
 }
 </script>
