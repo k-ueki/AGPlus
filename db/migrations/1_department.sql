@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE TABLE department (
+CREATE TABLE NOT EXISTS department (
   id INT(10) UNSIGNED NOT NULL,
   name VARCHAR(255) NOT NULL,
   campus VARCHAR(255) NOT NULL,

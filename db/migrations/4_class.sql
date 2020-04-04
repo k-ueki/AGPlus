@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE TABLE classes (
+CREATE TABLE NOT EXISTS classes (
   id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   semester VARCHAR(55) NOT NULL,

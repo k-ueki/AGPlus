@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE TABLE user (
+CREATE TABLE NOT EXISTS user (
   id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   firebase_uid VARCHAR(255) NOT NULL,
   name VARCHAR(255) NOT NULL,

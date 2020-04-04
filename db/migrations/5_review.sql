@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE TABLE review (
+CREATE TABLE NOT EXISTS review (
   id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   class_id INT(10) UNSIGNED NOT NULL,
   difficulty_credit INT(10) UNSIGNED NOT NULL,

@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE TABLE cource_class (
+CREATE TABLE NOT EXISTS cource_class (
 	cource_id INT(10) UNSIGNED NOT NULL,
 	class_id INT(10) UNSIGNED NOT NULL,
 	FOREIGN KEY (cource_id) REFERENCES cource(id),
