@@ -1,7 +1,6 @@
 FROM node:latest
 
 COPY package*.json /app
+COPY yarn.lock /app
 
-RUN apt-get update
-RUN npm install npm@latest -g
-RUN npm install
+RUN yarn install

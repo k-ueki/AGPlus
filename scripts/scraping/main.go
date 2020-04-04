@@ -27,7 +27,7 @@ type Classes struct {
 var endpoint string = "http://syllabus.aoyama.ac.jp/"
 
 func gormConnect() *gorm.DB {
-	CONNECT := "root:@/agpluss"
+	CONNECT := "root:@tcp(mysql:3306)/agpluss"
 	db, err := gorm.Open("mysql", CONNECT)
 
 	if err != nil {
