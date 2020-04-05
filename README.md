@@ -4,7 +4,7 @@
 
 ## Project setup
 ```
-git clone https://github.com/k-ueki/AGPluss
+git clone https://github.com/k-ueki/AGPlus.git
 ```
 
 ### 環境構築手順
