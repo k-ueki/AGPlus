@@ -1,4 +1,4 @@
-DBNAME:=agpluss
+DBNAME:=agplus
 DATASOURCE:=root:@tcp(mysql:3306)/$(DBNAME)
 
 mysql:

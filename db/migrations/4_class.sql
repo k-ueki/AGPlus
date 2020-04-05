@@ -1,5 +1,5 @@
 -- +goose Up
-CREATE TABLE NOT EXISTS classes (
+CREATE TABLE IF NOT EXISTS class (
   id int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
   name VARCHAR(255) NOT NULL,
   semester VARCHAR(55) NOT NULL,
@@ -13,4 +13,4 @@ CREATE TABLE NOT EXISTS classes (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- +goose Down
-DROP TABLE classes;
+DROP TABLE class;
