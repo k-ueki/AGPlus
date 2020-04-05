@@ -14,7 +14,7 @@ export default new Router({
       component: Index
     },
     {
-      path: '/class_list',
+      path: '/class-list',
       name: 'classList',
       component: ClassList
     }
