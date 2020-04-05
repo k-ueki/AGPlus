@@ -1,10 +1,10 @@
 <template>
     <div>
-    <img alt="Vue logo" src="../assets/AGPlus.png">
-    <p>
-        Welcome to AGPlus. You can search classes' and professors' reputations in Aoyama Gakuin University!<br>
-<!--        Let's enjoy your campus life in AGU!-->
-    </p>
+        <img alt="Vue logo" src="../assets/AGPlus2.png" width="30%" height="30%">
+        <p>
+            Welcome to AGPlus. You can search classes' and professors' reputations in Aoyama Gakuin University!<br>
+<!--            Let's enjoy your campus life in AGU!-->
+        </p>
     </div>
 </template>
 
