@@ -1,22 +1,33 @@
 <template>
     <div class="hello">
-        <h1>{{ msg }}</h1>
-        <p>
-            For a guide and recipes on how to configure / customize this project,<br>
-            check out the
-            <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>.
-        </p>
-        <h3>Installed CLI Plugins</h3>
-        <ul>
-            <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-            <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-        </ul>
+<!--        <SideBar></SideBar>-->
+        <div>
+            <h2>授業一覧</h2>
+        </div>
+        <div class="card-board">
+            <div class="card">
+                <a>HogeHoge</a><br/>
+                <a>教員名：hoge太郎</a>
+            </div>
+            <div class="card">
+                <a>piyopiyo</a><br/>
+                <a>教員名：piyo太郎</a>
+            </div>
+            <div class="card">
+                <a>vowvow</a><br/>
+                <a>教員名：vow太郎</a>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+    // import SideBar from './SideBar'
     export default {
         name: 'ClassList',
+        components:{
+         // SideBar
+        },
         props: {
             msg: String
         }
@@ -38,5 +49,13 @@
     }
     a {
         color: #42b983;
+    }
+    .card-board{
+
+    }
+    .card{
+        width:10%;
+        height:15%;
+        background-color:black;
     }
 </style>
