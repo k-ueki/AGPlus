@@ -22,14 +22,30 @@
 </template>
 
 <script>
+    import axios from 'axios'
     // import SideBar from './SideBar'
+
+    const host = "localhost:7777"
+    const getClassURL = host + "/classes"
+
     export default {
         name: 'ClassList',
+        data(){
+            return{
+                classes:[],
+            }
+        },
         components:{
          // SideBar
         },
         props: {
             msg: String
+        },
+        created() {
+            axios.get(getClassURL)
+                .then(res=>{
+                    this.classes = res
+                })
         }
     }
 </script>
