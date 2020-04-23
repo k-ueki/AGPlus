@@ -5,6 +5,9 @@
             <h2>授業一覧</h2>
         </div>
         <div class="card-board">
+            <div v-for="c in classes">
+                {{c}}
+            </div>
             <div class="card">
                 <a>HogeHoge</a><br/>
                 <a>教員名：hoge太郎</a>
@@ -45,6 +48,7 @@
             axios.get(getClassURL)
                 .then(res=>{
                     this.classes = res
+
                 })
         }
     }
