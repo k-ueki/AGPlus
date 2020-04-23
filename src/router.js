@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Index from './components/Index'
-import ClassList from './components/ClassList'
+import Index from './pages/Index'
+import ClassList from './pages/ClassList'
 
 Vue.use(Router)
 

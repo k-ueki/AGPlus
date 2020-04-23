@@ -8,11 +8,11 @@
             <div class="card">
                 <a>HogeHoge</a><br/>
                 <a>教員名：hoge太郎</a>
-            </div>
+            </div><br/>
             <div class="card">
                 <a>piyopiyo</a><br/>
                 <a>教員名：piyo太郎</a>
-            </div>
+            </div><br/>
             <div class="card">
                 <a>vowvow</a><br/>
                 <a>教員名：vow太郎</a>
