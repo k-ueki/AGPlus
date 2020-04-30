@@ -11,7 +11,7 @@ import (
 	"github.com/jinzhu/gorm"
 )
 
-type Classes struct {
+type Class struct {
 	Name        string `db:"name"`
 	Semester    string `db:"semester"`
 	Credits     int    `db:"credits"`
@@ -24,10 +24,10 @@ type Classes struct {
 	// Evaluation string
 }
 
-var endpoint string = "http://syllabus.aoyama.ac.jp/"
+var endpoint = "http://syllabus.aoyama.ac.jp/"
 
 func gormConnect() *gorm.DB {
-	CONNECT := "root:@tcp(mysql:3306)/agpluss"
+	CONNECT := "root:@tcp(localhost:3306)/agplus"
 	db, err := gorm.Open("mysql", CONNECT)
 
 	if err != nil {
@@ -40,6 +40,10 @@ func gormConnect() *gorm.DB {
 func main() {
 	db := gormConnect()
 	defer db.Close()
+
+	db.Exec("SET foreign_key_checks = 0")
+	db.Exec("TRUNCATE TABLE class")
+	db.Exec("SET foreign_key_checks = 1")
 
 	_, err := url.Parse(endpoint)
 	if err != nil {
@@ -130,13 +134,6 @@ func main() {
 			campus[index] = temp2[0]
 		})
 
-		// fmt.Println(temp2)
-		// fmt.Println(hrefs)
-		// fmt.Println(dayats)
-		// fmt.Println(campus)
-		//
-		// return
-
 		/////詳細のスクレイピング
 		for i, href := range hrefs {
 			if href == "" {
@@ -167,7 +164,7 @@ func main() {
 
 			credits, _ := strconv.Atoi(temp[4])
 			year, _ := strconv.Atoi(temp[0])
-			class := Classes{
+			class := &Class{
 				Name:        temp[1],
 				Semester:    temp[3],
 				Credits:     credits,
@@ -182,7 +179,7 @@ func main() {
 			fmt.Printf("%#v\n", class)
 			fmt.Println(count)
 
-			db.Create(&class)
+			db.Table("class").Create(class)
 		}
 	}
 }
