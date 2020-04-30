@@ -33,6 +33,6 @@ func setRoutes(r *gin.Engine) {
 
 	{
 		classes := route.Group("classes")
-		classes.GET("/", app.ClassGetController.Hoge)
+		classes.GET("/", app.ClassGetController.List)
 	}
 }
