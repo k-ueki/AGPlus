@@ -18,3 +18,11 @@ func (s *ClassGetService) List() ([]*model.Class, error) {
 	}
 	return classes, nil
 }
+
+func (s *ClassGetService) Show(id int) (*model.Class, error) {
+	class, err := s.ClassGetRepository.FindByID(id)
+	if err != nil {
+		return nil, err
+	}
+	return class, nil
+}

@@ -64,5 +64,6 @@ func setRoutes(r *Server) {
 	{
 		classes := router.Group("classes")
 		classes.GET("/", app.ClassGetController.List)
+		classes.GET("/:id", app.ClassGetController.Show)
 	}
 }
