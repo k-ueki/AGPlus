@@ -13,12 +13,13 @@ type (
 	}
 )
 
-func (c *ClassGetController) List(ctx *gin.Context) error {
+func (c *ClassGetController) List(ctx *gin.Context) {
 	classes, err := c.ClassGetService.List()
 	if err != nil {
 		// TODO: ErrorHandlingしっかり
-		return err
+		ctx.JSON(http.StatusInternalServerError, err)
+		return
 	}
 	ctx.JSON(http.StatusOK, classes)
-	return nil
+	return
 }

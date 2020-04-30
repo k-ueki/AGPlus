@@ -12,5 +12,9 @@ type (
 )
 
 func (r *ClassGetRepository) FindAll() ([]*model.Class, error) {
-	return nil, nil
+	var rows []*model.Class
+	if err := r.DB.Find(&rows).Error; err != nil {
+		return nil, err
+	}
+	return rows, nil
 }
