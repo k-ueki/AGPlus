@@ -3,6 +3,8 @@ package main
 import (
 	"log"
 
+	"github.com/gin-contrib/cors"
+
 	"github.com/jinzhu/gorm"
 	"github.com/k-ueki/AGPlus/server/common"
 
@@ -45,7 +47,10 @@ func run() error {
 		return err
 	}
 
+	server.Router.Use(cors.New(cors.Config{AllowOrigins: []string{"*"}}))
+
 	setRoutes(server)
+
 	return server.Router.Run(":8888")
 }
 
