@@ -5,17 +5,11 @@
             <h2>授業一覧</h2>
         </div>
         <div class="card-board">
-            <div class="card">
-                <a>HogeHoge</a><br/>
-                <a>教員名：hoge太郎</a>
-            </div>
-            <div class="card">
-                <a>piyopiyo</a><br/>
-                <a>教員名：piyo太郎</a>
-            </div>
-            <div class="card">
-                <a>vowvow</a><br/>
-                <a>教員名：vow太郎</a>
+            <div v-for="(v,key) in classes" :key="key">
+                <div class="card">
+                    <a>{{v.Name}}</a><br/>
+                    <a>教員名：{{v.Teacher}}</a><br/>
+                </div><br/>
             </div>
         </div>
     </div>
@@ -23,6 +17,10 @@
 
 <script>
     // import SideBar from './SideBar'
+    import axios from 'axios'
+
+    var baseURL = "http://localhost:8888"
+
     export default {
         name: 'ClassList',
         components:{
@@ -30,6 +28,17 @@
         },
         props: {
             msg: String
+        },
+        data(){
+            return{
+                classes:[],
+            }
+        },
+        created() {
+            axios.get(baseURL + "/classes/")
+                .then(response=>{
+                    this.classes = response.data
+                })
         }
     }
 </script>
