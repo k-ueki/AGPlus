@@ -15,7 +15,8 @@ import (
 
 type (
 	App struct {
-		ClassGetController api.ClassGetController
+		ClassGetController   api.ClassGetController
+		ReviewPostController api.ReviewPostController
 	}
 
 	Server struct {
@@ -56,14 +57,15 @@ func run() error {
 
 func setRoutes(r *Server) {
 	app := &App{
-		ClassGetController: *api.NewClassGetController(r.DB),
+		ClassGetController:   *api.NewClassGetController(r.DB),
+		ReviewPostController: *api.NewReviewPostController(r.DB),
 	}
 	router := r.Router.Group("/")
-	//auth := r.AuthorizeWrapper
 
 	{
 		classes := router.Group("classes")
 		classes.GET("/", app.ClassGetController.List)
 		classes.GET("/:id", app.ClassGetController.Show)
+		classes.POST("/:id/review", app.ReviewPostController.Store)
 	}
 }
