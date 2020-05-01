@@ -1,9 +1,0 @@
-name: Build Test
-on: push
-
-jobs:
-  build:
-    name: Build Test
-    runs-on: ubuntu-latest
-    steps:
-      - run: go build
