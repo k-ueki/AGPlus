@@ -16,6 +16,7 @@ jobs:
           git clone https://github.com/k-ueki/AGPlus.git
           go get github.com/jinzhu/gorm
           go get -u github.com/k-ueki/AGPlus/server/domain/model
+          go get -u github.com/DATA-DOG/go-sqlmock
 
       - name: Go Repository Test
         run: go test ./AGPlus/server/adaptor/repository -v
