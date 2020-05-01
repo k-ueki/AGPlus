@@ -1,4 +1,4 @@
-name: server_ci
+name: Test
 on: push
 
 jobs:

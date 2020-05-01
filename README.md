@@ -1,9 +1,9 @@
-![](./src/assets/AGPlus6.png)
-![Test](https://github.com/k-ueki/AGPlus/workflows/server_ci/badge.svg)
+![](./src/assets/AGPlus4.png)
+![Test](https://github.com/k-ueki/AGPlus/workflows/Test/badge.svg)
 
-<div style="text-align: center;">
 このサービスは青山学院大学の授業や教員に関するレビューを投稿および検索できるwebサービスです。
-</div>
+
+
 ## Project setup
 ```
 git clone https://github.com/k-ueki/AGPluss
