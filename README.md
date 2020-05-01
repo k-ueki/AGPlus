@@ -1,4 +1,4 @@
-![](./src/assets/AGPlus3.png)
+![](./src/assets/AGPlus6.png)
 ![Test](https://github.com/k-ueki/AGPlus/workflows/server_ci/badge.svg)
 
 <div style="text-align: center;">
