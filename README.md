@@ -1,6 +1,7 @@
 ![](./src/assets/AGPlus4.png)
+<p align:center>
 ![](https://github.com/k-ueki/AGPlus/workflows/Test/badge.svg?branch=master&event=push)
-
+</p>
 このサービスは青山学院大学の授業や教員に関するレビューを投稿および検索できるwebサービスです。
 
 
