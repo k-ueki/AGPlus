@@ -1,8 +1,6 @@
 package repository
 
 import (
-	"fmt"
-
 	"github.com/jinzhu/gorm"
 	"github.com/k-ueki/AGPlus/server/domain/model"
 )
@@ -24,7 +22,6 @@ func (r *ClassGetRepository) FindAll() ([]*model.Class, error) {
 func (r *ClassGetRepository) FindByID(id int) (*model.Class, error) {
 	var row model.Class
 	if err := r.DB.First(&row, id).Error; err != nil {
-		fmt.Println("err", err)
 		return nil, err
 	}
 	return &row, nil

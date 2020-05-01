@@ -22,7 +22,7 @@ type (
 	}
 )
 
-func (a *api) assertJSON(actual []*model.Class, data interface{}, t *testing.T) {
+func (a *api) assertJSON(actual, data interface{}, t *testing.T) {
 	act, err := json.Marshal(actual)
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when marshaling expected json data", err)
@@ -85,3 +85,32 @@ func TestShouldGetAllClasses(t *testing.T) {
 		t.Errorf("there were unfulfilled expectations: %s", err)
 	}
 }
+
+//func TestShouldGetClassByID(t *testing.T) {
+//	db, mock, err := connectNewTestMock(t)
+//	if err != nil {
+//		t.Error("failed to connect DB : ", err)
+//		return
+//	}
+//	repository := ClassGetRepository{DB: db}
+//
+//	id := 1234
+//	name := "hjasldfk"
+//	rows := sqlmock.NewRows([]string{"id", "name"}).AddRow(id, name).AddRow(2, "piyo").AddRow("3", "hogehoeg").AddRow(4, "huuh")
+//	mock.ExpectQuery(regexp.QuoteMeta("SELECT * FROM `class` WHERE (`class`.`id` = 1234) ORDER BY `class`.`id` ASC LIMIT 1")).WillReturnRows(rows)
+//	//mock.ExpectQuery(regexp.QuoteMeta("SELECT * FROM `class`")).WillReturnRows(rows)
+//
+//	resp, err := repository.FindByID(id)
+//	if err != nil {
+//		t.Fatal("failed to FindByID : ", err)
+//	}
+//
+//	if resp.ID != id || resp.Name != name {
+//		t.Error("data is not expected value")
+//		return
+//	}
+//
+//	if err := mock.ExpectationsWereMet(); err != nil {
+//		t.Errorf("there were unfulfilled expectations: %s", err)
+//	}
+//}
