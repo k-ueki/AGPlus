@@ -2,8 +2,8 @@ package api
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/k-ueki/AGPlus/server/adaptor/api/input"
 
@@ -15,7 +15,7 @@ import (
 
 type (
 	ReviewPostController struct {
-		service.ReviewPostService
+		ReviewPostService service.ReviewPostService
 	}
 )
 
@@ -30,12 +30,23 @@ func NewReviewPostController(db *gorm.DB) *ReviewPostController {
 }
 
 func (c *ReviewPostController) Store(ctx *gin.Context) {
-	classID := ctx.Param("id")
+	classID, err := strconv.Atoi(ctx.Param("id"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
+		return
+	}
 	q := input.ReviewClassRequest{}
 	if err := ctx.BindQuery(&q); err != nil {
 		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
 		return
 	}
 
-	fmt.Println(q)
+	err = c.ReviewPostService.Store(classID, &q)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, errors.New("failed to store"))
+		return
+	}
+
+	ctx.JSON(http.StatusCreated, nil)
+	return
 }
