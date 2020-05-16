@@ -21,5 +21,4 @@ func NewReviewQueryController(db *gorm.DB) *ReviewQueryController {
 }
 
 func (c *ReviewQueryController) List(ctx *gin.Context) {
-
 }
