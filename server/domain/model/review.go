@@ -1,14 +1,11 @@
 package model
 
 type (
-	ClassReview struct {
-		Class
-		Evaluation
-	}
-
-	Evaluation struct {
+	Review struct {
+		ClassID             int
 		EaseOfUnderstanding int
 		Motivation          int
+		Attendance          int
 		TestsDifficulty     int
 		Easiness            int
 	}

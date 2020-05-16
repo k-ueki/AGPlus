@@ -12,6 +12,7 @@ type (
 	ReviewClassRequest struct {
 		EaseOfUnderstanding int `query:"easeOfUnderstanding"`
 		Motivation          int `query:"motivation"`
+		Attendance          int `query:"attendance"`
 		TestsDifficulty     int `query:"testDifficulty"`
 		Easiness            int `query:"easiness"`
 	}
