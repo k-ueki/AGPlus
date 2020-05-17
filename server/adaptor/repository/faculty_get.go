@@ -20,9 +20,9 @@ func (r *FacultyGetRepository) FindFaculties() ([]*entity.Faculty, error) {
 	return rows, nil
 }
 
-func (r *FacultyGetRepository) FindDepartments() ([]*entity.Faculty, error) {
-	var rows []*entity.Faculty
-	if err := r.DB.Where("type = ?", model.FacultyTypeDepartment).Find(&rows).Error; err != nil {
+func (r *FacultyGetRepository) FindDepartments() ([]*entity.Department, error) {
+	var rows []*entity.Department
+	if err := r.DB.LogMode(true).Where("type = ?", model.FacultyTypeDepartment).Find(&rows).Error; err != nil {
 		return nil, err
 	}
 	return rows, nil

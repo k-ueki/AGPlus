@@ -36,11 +36,11 @@ func (c *FacultyGetController) ListFaculty(ctx *gin.Context) {
 }
 
 func (c *FacultyGetController) ListDepartment(ctx *gin.Context) {
-	faculties, err := c.FacultyGetService.ListDepartment()
+	departments, err := c.FacultyGetService.ListDepartment()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, "failed to list faculties")
 		return
 	}
-	ctx.JSON(http.StatusOK, faculties)
+	ctx.JSON(http.StatusOK, departments)
 	return
 }

@@ -19,10 +19,10 @@ func (s *FacultyGetService) ListFaculty() ([]*entity.Faculty, error) {
 	return faculties, nil
 }
 
-func (s *FacultyGetService) ListDepartment() ([]*entity.Faculty, error) {
-	faculties, err := s.FacultyGetRepository.FindDepartments()
+func (s *FacultyGetService) ListDepartment() ([]*entity.Department, error) {
+	departments, err := s.FacultyGetRepository.FindDepartments()
 	if err != nil {
 		return nil, err
 	}
-	return faculties, nil
+	return departments, nil
 }
