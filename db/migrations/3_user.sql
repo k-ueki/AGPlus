@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS user (
   PRIMARY KEY (id),
   UNIQUE KEY `firebase_uid` (`firebase_uid`),
   FOREIGN KEY (dep_id) REFERENCES department(id),
-  FOREIGN KEY (course_id) REFERENCES cource(id)
+  FOREIGN KEY (course_id) REFERENCES course(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- +goose Down

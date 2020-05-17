@@ -6,10 +6,12 @@ CREATE TABLE IF NOT EXISTS class (
   credits INT(10) UNSIGNED NOT NULL,
   teacher VARCHAR(255) NOT NULL,
   description LONG,
+  course_id INT(2) NOT NULL,
   year INT(10) UNSIGNED NOT NULL,
   day_at VARCHAR(25) NOT NULL,
   campus VARCHAR(55) NOT NULL,
-  PRIMARY KEY (id)
+  PRIMARY KEY (id),
+  FOREIGN KEY (course_id) REFERENCES course(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- +goose Down
