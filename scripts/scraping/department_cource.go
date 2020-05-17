@@ -32,8 +32,7 @@ func main() {
 	defer db.Close()
 
 	db.Exec("SET foreign_key_checks = 0")
-	db.Exec("TRUNCATE TABLE department")
-	db.Exec("TRUNCATE TABLE course")
+	db.Exec("TRUNCATE TABLE faculty")
 	db.Exec("SET foreign_key_checks = 1")
 
 	_, err = url.Parse(endPoint)
@@ -70,7 +69,7 @@ func main() {
 				//faculty[j].FacultyID = j + 3
 				//faculty[j].Name = ss.Find("p.title").Text()
 				name := ss.Find("p.title").Text()
-				columnCount = j + 3
+				columnCount = j + 1
 
 				courseURL, _ := ss.Find("a").Attr("href")
 
@@ -105,7 +104,7 @@ func main() {
 
 				doc.Find("div.box > ul > li.box_item").Each(func(jj int, sssss *goquery.Selection) {
 					if sssss.Find("h5").Text() != "" {
-						course[j+3] = append(course[j+3], sssss.Find("h5").Text())
+						course[j+1] = append(course[j+1], sssss.Find("h5").Text())
 					}
 				})
 
@@ -113,7 +112,7 @@ func main() {
 					Name:      name,
 					Type:      2,
 					Campus:    campusID,
-					FacultyID: j + 3,
+					FacultyID: j + 1,
 				}
 				faculty = append(faculty, f)
 
