@@ -13,7 +13,7 @@ type (
 )
 
 func (r *ReviewPostRepository) Store(p *model.Review) error {
-	if err := r.DB.LogMode(true).Save(p).Error; err != nil {
+	if err := r.DB.Save(p).Error; err != nil {
 		return errors.Wrap(err, "failed to insert review")
 	}
 	return nil

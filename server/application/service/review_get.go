@@ -11,6 +11,10 @@ type (
 	}
 )
 
-func (s *ReviewGetService) List() (*model.Review, error) {
-	return nil, nil
+func (s *ReviewGetService) List() ([]*model.Review, error) {
+	reviews, err := s.ReviewGetRepository.FindAll()
+	if err != nil {
+		return nil, err
+	}
+	return reviews, nil
 }

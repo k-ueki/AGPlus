@@ -2,12 +2,27 @@ package model
 
 type (
 	Review struct {
+		UserID          int
 		ClassID         int
-		Understanding   int `gorm:"understanding"`
-		Motivation      int `gorm:"motivation"`
-		Attendance      int `gorm:"attendance"`
-		TestsDifficulty int `gorm:"tests_difficulty"`
-		Easiness        int `gorm:"easiness"`
+		Understanding   int
+		Motivation      int
+		Attendance      int
+		TestsDifficulty int
+		Easiness        int
+	}
+
+	Evaluation struct {
+		Understanding   int
+		Motivation      int
+		Attendance      int
+		TestsDifficulty int
+		Easiness        int
+	}
+
+	ReviewInfo struct {
+		ReviewUser User
+		Class
+		Review
 	}
 )
 
