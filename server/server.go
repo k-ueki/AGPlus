@@ -78,6 +78,13 @@ func setRoutes(r *Server) {
 	}
 	{
 		faculties := router.Group("/faculties")
-		faculties.GET("", app.FacultyGetController.List)
+		faculties.GET("", app.FacultyGetController.ListFaculty)
+		//faculties.GET("", app.FacultyGetController.ShowFaculty)
 	}
+	{
+		departments := router.Group("/departments")
+		departments.GET("", app.FacultyGetController.ListDepartment)
+		//departments.GET("", app.FacultyGetController.ShowDepartment)
+	}
+
 }

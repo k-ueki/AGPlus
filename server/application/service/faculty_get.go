@@ -11,8 +11,16 @@ type (
 	}
 )
 
-func (s *FacultyGetService) List() ([]*entity.Faculty, error) {
+func (s *FacultyGetService) ListFaculty() ([]*entity.Faculty, error) {
 	faculties, err := s.FacultyGetRepository.FindFaculties()
+	if err != nil {
+		return nil, err
+	}
+	return faculties, nil
+}
+
+func (s *FacultyGetService) ListDepartment() ([]*entity.Faculty, error) {
+	faculties, err := s.FacultyGetRepository.FindDepartments()
 	if err != nil {
 		return nil, err
 	}

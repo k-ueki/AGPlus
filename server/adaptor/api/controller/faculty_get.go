@@ -25,8 +25,18 @@ func NewFacultyGetController(db *gorm.DB) *FacultyGetController {
 	}
 }
 
-func (c *FacultyGetController) List(ctx *gin.Context) {
-	faculties, err := c.FacultyGetService.List()
+func (c *FacultyGetController) ListFaculty(ctx *gin.Context) {
+	faculties, err := c.FacultyGetService.ListFaculty()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, "failed to list faculties")
+		return
+	}
+	ctx.JSON(http.StatusOK, faculties)
+	return
+}
+
+func (c *FacultyGetController) ListDepartment(ctx *gin.Context) {
+	faculties, err := c.FacultyGetService.ListDepartment()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, "failed to list faculties")
 		return
