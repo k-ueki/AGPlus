@@ -1,15 +1,25 @@
 package input
 
+import "errors"
+
 type (
 	GetFaculty struct {
 		ID int `query:"id"`
 	}
 
 	ListFacultyByCampusID struct {
-		CampusID int `query:"campusID"`
+		CampusID int
 	}
 
 	ListDepartmentByCampusID struct {
-		CampusID int `query:"campusID"`
+		CampusID  int
+		FacultyID int
 	}
 )
+
+func (l *ListDepartmentByCampusID) Validate() error {
+	if l.CampusID != 0 && l.FacultyID != 0 {
+		return errors.New("failed to validate")
+	}
+	return nil
+}

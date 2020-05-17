@@ -52,6 +52,14 @@ func (r *FacultyGetRepository) FindDepartmentsByCampusID(campusID int) ([]*entit
 	return rows, nil
 }
 
+func (r *FacultyGetRepository) FindDepartmentsByFacultyID(facultyID int) ([]*entity.Department, error) {
+	var rows []*entity.Department
+	if err := r.DB.Where("type = ? AND faculty_id = ?", model.FacultyTypeDepartment, facultyID).Find(&rows).Error; err != nil {
+		return nil, err
+	}
+	return rows, nil
+}
+
 func (r *FacultyGetRepository) FindDepartmentByID(id int) (*entity.Department, error) {
 	var row entity.Department
 	if err := r.DB.Where("type = ? AND id = ?", model.FacultyTypeDepartment, id).Find(&row).Error; err != nil {

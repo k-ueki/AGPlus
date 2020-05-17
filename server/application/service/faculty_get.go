@@ -51,6 +51,14 @@ func (s *FacultyGetService) ListDepartmentsByCampusID(campusID int) ([]*entity.D
 	return departments, nil
 }
 
+func (s *FacultyGetService) ListDepartmentsByFacultyID(facultyID int) ([]*entity.Department, error) {
+	departments, err := s.FacultyGetRepository.FindDepartmentsByFacultyID(facultyID)
+	if err != nil {
+		return nil, err
+	}
+	return departments, nil
+}
+
 func (s *FacultyGetService) ShowDepartmentByID(id int) (*entity.Department, error) {
 	department, err := s.FacultyGetRepository.FindDepartmentByID(id)
 	if err != nil {
