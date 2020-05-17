@@ -15,12 +15,14 @@ services:
         command: mysqld --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
 
     server:
-        build: .
+        build:
+            context: .
+            dockerfile: ./docker/server/Dockerfile
         container_name: agplus_server
         tty: true
         stdin_open: true
         privileged: true
-        working_dir: /agplus
+        working_dir: /agplus/server
         ports:
             - "6060:6060"
         volumes:
@@ -32,6 +34,8 @@ services:
             - GO111MODULE=on
         depends_on:
             - mysql
+        command:
+            - go run *.go
 
     front:
         image: docker-vue
@@ -53,8 +57,8 @@ services:
     migrate:
         container_name: agplus_migrate
         build:
-            context: ./db
-            dockerfile: Dockerfile
+            context: .
+            dockerfile: ./docker/db/Dockerfile
         working_dir: /agplus
         volumes:
             - .:/agplus

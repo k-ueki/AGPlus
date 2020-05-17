@@ -64,6 +64,7 @@ func setRoutes(r *Server) {
 		ReviewGetController:  *api.NewReviewGetController(r.DB),
 		FacultyGetController: *api.NewFacultyGetController(r.DB),
 	}
+
 	router := r.Router.Group("/")
 
 	{
