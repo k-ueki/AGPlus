@@ -10,13 +10,13 @@ import (
 )
 
 type (
-	ReviewQueryController struct {
+	ReviewGetController struct {
 		service.ReviewGetService
 	}
 )
 
-func NewReviewQueryController(db *gorm.DB) *ReviewQueryController {
-	return &ReviewQueryController{
+func NewReviewGetController(db *gorm.DB) *ReviewGetController {
+	return &ReviewGetController{
 		ReviewGetService: service.ReviewGetService{
 			ReviewGetRepository: repository.ReviewGetRepository{
 				DB: db,
@@ -25,7 +25,7 @@ func NewReviewQueryController(db *gorm.DB) *ReviewQueryController {
 	}
 }
 
-func (c *ReviewQueryController) List(ctx *gin.Context) {
+func (c *ReviewGetController) List(ctx *gin.Context) {
 	reviews, err := c.ReviewGetService.List()
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)

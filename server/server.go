@@ -15,9 +15,10 @@ import (
 
 type (
 	App struct {
-		ClassGetController    api.ClassGetController
-		ReviewPostController  api.ReviewPostController
-		ReviewQueryController api.ReviewQueryController
+		api.ClassGetController
+		api.ReviewPostController
+		api.ReviewGetController
+		api.FacultyGetController
 	}
 
 	Server struct {
@@ -58,9 +59,10 @@ func run() error {
 
 func setRoutes(r *Server) {
 	app := &App{
-		ClassGetController:    *api.NewClassGetController(r.DB),
-		ReviewPostController:  *api.NewReviewPostController(r.DB),
-		ReviewQueryController: *api.NewReviewQueryController(r.DB),
+		ClassGetController:   *api.NewClassGetController(r.DB),
+		ReviewPostController: *api.NewReviewPostController(r.DB),
+		ReviewGetController:  *api.NewReviewGetController(r.DB),
+		FacultyGetController: *api.NewFacultyGetController(r.DB),
 	}
 	router := r.Router.Group("/")
 
@@ -72,6 +74,10 @@ func setRoutes(r *Server) {
 	}
 	{
 		reviews := router.Group("reviews")
-		reviews.GET("/", app.ReviewQueryController.List)
+		reviews.GET("/", app.ReviewGetController.List)
+	}
+	{
+		faculties := router.Group("/faculties")
+		faculties.GET("", app.FacultyGetController.List)
 	}
 }
