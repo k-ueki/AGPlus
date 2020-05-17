@@ -24,6 +24,12 @@ func (s *ReviewPostService) Store(classID int, param *input.ReviewClassRequest) 
 	}); err != nil {
 		return errors.Wrap(err, "failed to store")
 	}
+	return nil
+}
 
+func (s *ReviewPostService) Delete(id int) error {
+	if err := s.ReviewPostRepository.Delete(id); err != nil {
+		return errors.Wrap(err, "failed to delete")
+	}
 	return nil
 }

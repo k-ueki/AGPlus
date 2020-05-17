@@ -72,6 +72,7 @@ func setRoutes(r *Server) {
 		classes.GET("/", app.ClassGetController.List)
 		classes.GET("/:id", app.ClassGetController.Show)
 		classes.POST("/:id/review", app.ReviewPostController.Store)
+		classes.DELETE("/review/:id", app.ReviewPostController.Delete)
 	}
 	{
 		reviews := router.Group("reviews")

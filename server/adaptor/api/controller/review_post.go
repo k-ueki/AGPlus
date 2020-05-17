@@ -15,7 +15,7 @@ import (
 
 type (
 	ReviewPostController struct {
-		ReviewPostService service.ReviewPostService
+		service.ReviewPostService
 	}
 )
 
@@ -48,5 +48,21 @@ func (c *ReviewPostController) Store(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusCreated, nil)
+	return
+}
+
+func (c *ReviewPostController) Delete(ctx *gin.Context) {
+	id, err := strconv.Atoi(ctx.Param("id"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
+		return
+	}
+
+	if err := c.ReviewPostService.Delete(id); err != nil {
+		ctx.JSON(http.StatusInternalServerError, errors.New("failed to delete review"))
+		return
+	}
+
+	ctx.JSON(http.StatusOK, nil)
 	return
 }
