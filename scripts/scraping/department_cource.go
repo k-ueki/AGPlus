@@ -14,7 +14,7 @@ type (
 	Faculty struct {
 		Name         string
 		Type         int
-		CampusID     int
+		Campus       int
 		FacultyID    int
 		DepartmentID int
 	}
@@ -112,7 +112,7 @@ func main() {
 				f := Faculty{
 					Name:      name,
 					Type:      2,
-					CampusID:  campusID,
+					Campus:    campusID,
 					FacultyID: j + 3,
 				}
 				faculty = append(faculty, f)
@@ -130,7 +130,7 @@ func main() {
 				f = Faculty{
 					Name:         vv,
 					Type:         3,
-					CampusID:     1,
+					Campus:       1,
 					FacultyID:    i,
 					DepartmentID: columnCount,
 				}
@@ -138,7 +138,7 @@ func main() {
 				f = Faculty{
 					Name:         vv,
 					Type:         3,
-					CampusID:     2,
+					Campus:       2,
 					FacultyID:    i,
 					DepartmentID: columnCount,
 				}

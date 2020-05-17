@@ -1,6 +1,8 @@
 package api
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
 	"github.com/k-ueki/AGPlus/server/adaptor/repository"
@@ -24,5 +26,11 @@ func NewFacultyGetController(db *gorm.DB) *FacultyGetController {
 }
 
 func (c *FacultyGetController) List(ctx *gin.Context) {
-
+	faculties, err := c.FacultyGetService.List()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, "failed to list faculties")
+		return
+	}
+	ctx.JSON(http.StatusOK, faculties)
+	return
 }

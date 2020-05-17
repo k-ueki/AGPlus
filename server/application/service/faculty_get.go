@@ -2,7 +2,7 @@ package service
 
 import (
 	"github.com/k-ueki/AGPlus/server/adaptor/repository"
-	"github.com/k-ueki/AGPlus/server/domain/model"
+	"github.com/k-ueki/AGPlus/server/domain/entity"
 )
 
 type (
@@ -11,6 +11,10 @@ type (
 	}
 )
 
-func (s *FacultyGetService) List() ([]*model.Faculty, error) {
-	return nil, nil
+func (s *FacultyGetService) List() ([]*entity.Faculty, error) {
+	faculties, err := s.FacultyGetRepository.FindFaculties()
+	if err != nil {
+		return nil, err
+	}
+	return faculties, nil
 }
