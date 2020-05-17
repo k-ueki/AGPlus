@@ -11,9 +11,9 @@ type (
 	}
 )
 
-func (r *ClassGetRepository) FindAll() ([]*model.Class, error) {
+func (r *ClassGetRepository) FindAll(start, fin int) ([]*model.Class, error) {
 	var rows []*model.Class
-	if err := r.DB.Find(&rows).Error; err != nil {
+	if err := r.DB.LogMode(true).Where("id BETWEEN ? AND ?", start, fin).Find(&rows).Error; err != nil {
 		return nil, err
 	}
 	return rows, nil

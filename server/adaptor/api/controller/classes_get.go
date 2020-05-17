@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/k-ueki/AGPlus/server/adaptor/api/input"
+
 	"github.com/jinzhu/gorm"
 	"github.com/k-ueki/AGPlus/server/adaptor/repository"
 
@@ -29,7 +31,13 @@ func NewClassGetController(db *gorm.DB) *ClassGetController {
 }
 
 func (c *ClassGetController) List(ctx *gin.Context) {
-	classes, err := c.ClassGetService.List()
+	q := input.ListClass{}
+	if err := ctx.BindQuery(&q); err != nil {
+		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
+		return
+	}
+
+	classes, err := c.ClassGetService.List(q.PerPage, q.Page)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
