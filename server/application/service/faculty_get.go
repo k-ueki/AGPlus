@@ -12,6 +12,22 @@ type (
 	}
 )
 
+func (s *FacultyGetService) ListFacultyByParam(param *input.ListFacultyByCampusID) ([]*entity.Faculty, error) {
+	if param.CampusID != 0 {
+		faculties, err := s.ListFacultyByCampusID(param.CampusID)
+		if err != nil {
+			return nil, err
+		}
+		return faculties, nil
+	}
+
+	faculties, err := s.ListFaculty()
+	if err != nil {
+		return nil, err
+	}
+	return faculties, nil
+}
+
 func (s *FacultyGetService) ListFaculty() ([]*entity.Faculty, error) {
 	faculties, err := s.FacultyGetRepository.FindFaculties()
 	if err != nil {

@@ -36,17 +36,7 @@ func (c *FacultyGetController) ListFaculty(ctx *gin.Context) {
 		return
 	}
 
-	if param.CampusID != 0 {
-		faculties, err := c.FacultyGetService.ListFacultyByCampusID(param.CampusID)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "failed to list faculties")
-			return
-		}
-		ctx.JSON(http.StatusOK, faculties)
-		return
-	}
-
-	faculties, err := c.FacultyGetService.ListFaculty()
+	faculties, err := c.FacultyGetService.ListFacultyByParam(&param)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, "failed to list faculties")
 		return

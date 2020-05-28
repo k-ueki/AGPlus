@@ -8,7 +8,7 @@ type (
 	}
 
 	ListFacultyByCampusID struct {
-		CampusID int
+		CampusID int `form:"campusId"`
 	}
 
 	ListDepartmentByCampusID struct {
