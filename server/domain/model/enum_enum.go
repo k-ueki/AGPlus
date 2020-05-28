@@ -59,20 +59,17 @@ func (x *Campus) UnmarshalText(text []byte) error {
 }
 
 const (
-	// FacultyTypeCampus is a FacultyType of type Campus
-	FacultyTypeCampus FacultyType = iota + 1
 	// FacultyTypeFaculty is a FacultyType of type Faculty
-	FacultyTypeFaculty
+	FacultyTypeFaculty FacultyType = iota + 1
 	// FacultyTypeDepartment is a FacultyType of type Department
 	FacultyTypeDepartment
 )
 
-const _FacultyTypeName = "CampusFacultyDepartment"
+const _FacultyTypeName = "FacultyDepartment"
 
 var _FacultyTypeMap = map[FacultyType]string{
-	1: _FacultyTypeName[0:6],
-	2: _FacultyTypeName[6:13],
-	3: _FacultyTypeName[13:23],
+	1: _FacultyTypeName[0:7],
+	2: _FacultyTypeName[7:17],
 }
 
 // String implements the Stringer interface.
@@ -84,9 +81,8 @@ func (x FacultyType) String() string {
 }
 
 var _FacultyTypeValue = map[string]FacultyType{
-	_FacultyTypeName[0:6]:   1,
-	_FacultyTypeName[6:13]:  2,
-	_FacultyTypeName[13:23]: 3,
+	_FacultyTypeName[0:7]:  1,
+	_FacultyTypeName[7:17]: 2,
 }
 
 // ParseFacultyType attempts to convert a string to a FacultyType
