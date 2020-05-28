@@ -12,9 +12,8 @@ CREATE TABLE IF NOT EXISTS faculty (
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8MB4;
 /*
 type:
-    1:キャンパス
-    2:学部
-    3:学科
+    1:学部
+    2:学科
  */
 
 -- +GOOSE DOWN

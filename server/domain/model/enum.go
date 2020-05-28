@@ -8,6 +8,6 @@ ENUM(Aoyama=1, Sagamihara)
 type Campus int
 
 /*
-ENUM(Campus = 1,Faculty,Department)
+ENUM(Faculty=1,Department)
 */
 type FacultyType int

@@ -110,7 +110,7 @@ func main() {
 
 				f := Faculty{
 					Name:      name,
-					Type:      2,
+					Type:      1,
 					Campus:    campusID,
 					FacultyID: j + 1,
 				}
@@ -128,7 +128,7 @@ func main() {
 			if i <= 9 {
 				f = Faculty{
 					Name:         vv,
-					Type:         3,
+					Type:         2,
 					Campus:       1,
 					FacultyID:    i,
 					DepartmentID: columnCount,
@@ -136,7 +136,7 @@ func main() {
 			} else {
 				f = Faculty{
 					Name:         vv,
-					Type:         3,
+					Type:         2,
 					Campus:       2,
 					FacultyID:    i,
 					DepartmentID: columnCount,
