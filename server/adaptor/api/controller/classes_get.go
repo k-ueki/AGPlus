@@ -49,7 +49,6 @@ func (c *ClassGetController) List(ctx *gin.Context) {
 }
 
 func (c *ClassGetController) Show(ctx *gin.Context) {
-	//TODO: structでbindしたい
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))

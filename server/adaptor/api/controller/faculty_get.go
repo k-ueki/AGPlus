@@ -30,14 +30,14 @@ func NewFacultyGetController(db *gorm.DB) *FacultyGetController {
 }
 
 func (c *FacultyGetController) ListFaculty(ctx *gin.Context) {
-	q := input.ListFacultyByCampusID{}
-	if err := ctx.BindQuery(&q); err != nil {
+	param := input.ListFacultyByCampusID{}
+	if err := ctx.BindQuery(&param); err != nil {
 		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
 		return
 	}
 
-	if q.CampusID != 0 {
-		faculties, err := c.FacultyGetService.ListFacultyByCampusID(q.CampusID)
+	if param.CampusID != 0 {
+		faculties, err := c.FacultyGetService.ListFacultyByCampusID(param.CampusID)
 		if err != nil {
 			ctx.JSON(http.StatusInternalServerError, "failed to list faculties")
 			return
@@ -72,36 +72,18 @@ func (c *FacultyGetController) ShowFaculty(ctx *gin.Context) {
 }
 
 func (c *FacultyGetController) ListDepartment(ctx *gin.Context) {
-	q := input.ListDepartmentByCampusID{}
-	if err := ctx.BindQuery(&q); err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
+	param := input.ListDepartmentByCampusID{}
+	if err := ctx.BindQuery(&param); err != nil {
+		//TODO:utilを噛ませる
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "invalid params"})
 		return
 	}
-	if err := q.Validate(); err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to validate"))
-		return
-	}
-
-	if q.CampusID != 0 {
-		departments, err := c.FacultyGetService.ListDepartmentsByCampusID(q.CampusID)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "failed to list departments")
-			return
-		}
-		ctx.JSON(http.StatusOK, departments)
-		return
-	}
-	if q.FacultyID != 0 {
-		departments, err := c.FacultyGetService.ListDepartmentsByFacultyID(q.FacultyID)
-		if err != nil {
-			ctx.JSON(http.StatusInternalServerError, "failed to list departments")
-			return
-		}
-		ctx.JSON(http.StatusOK, departments)
+	if err := param.Validate(); err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{"message": "invalid params"})
 		return
 	}
 
-	departments, err := c.FacultyGetService.ListDepartment()
+	departments, err := c.FacultyGetService.ListDepartmentsByParam(&param)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, "failed to list departments")
 		return
