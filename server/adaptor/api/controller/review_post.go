@@ -35,13 +35,13 @@ func (c *ReviewPostController) Store(ctx *gin.Context) {
 		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
 		return
 	}
-	q := input.ReviewClassRequest{}
-	if err := ctx.BindQuery(&q); err != nil {
+	param := input.ReviewClassRequest{}
+	if err := ctx.BindQuery(&param); err != nil {
 		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
 		return
 	}
 
-	err = c.ReviewPostService.Store(classID, &q)
+	err = c.ReviewPostService.Store(classID, &param)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errors.New("failed to store"))
 		return

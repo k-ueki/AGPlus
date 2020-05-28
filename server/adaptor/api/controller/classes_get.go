@@ -33,13 +33,13 @@ func NewClassGetController(db *gorm.DB) *ClassGetController {
 }
 
 func (c *ClassGetController) List(ctx *gin.Context) {
-	q := input.ListClass{}
-	if err := ctx.BindQuery(&q); err != nil {
+	param := input.ListClass{}
+	if err := ctx.BindQuery(&param); err != nil {
 		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
 		return
 	}
 
-	classes, err := c.ClassGetService.List(converter.ConvertListClassParamToQuery(&q))
+	classes, err := c.ClassGetService.List(converter.ConvertListClassParamToQuery(&param))
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
