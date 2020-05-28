@@ -6,6 +6,8 @@ import (
 	"regexp"
 	"testing"
 
+	"github.com/k-ueki/AGPlus/server/domain/query"
+
 	sqlmock "github.com/DATA-DOG/go-sqlmock"
 
 	"github.com/jinzhu/gorm"
@@ -64,7 +66,10 @@ func TestShouldGetAllClasses(t *testing.T) {
 
 	mock.ExpectQuery(regexp.QuoteMeta("SELECT * FROM `class`")).WillReturnRows(rows)
 
-	resp, err := repository.FindAll()
+	resp, err := repository.FindAll(&query.ListPaginationQuery{
+		Limit:  20,
+		Offset: 0,
+	})
 	if err != nil {
 		t.Fatal("failed to FindAll : ", err)
 	}

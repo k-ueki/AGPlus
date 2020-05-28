@@ -2,8 +2,8 @@ package service
 
 import (
 	"github.com/k-ueki/AGPlus/server/adaptor/repository"
-	"github.com/k-ueki/AGPlus/server/common"
 	"github.com/k-ueki/AGPlus/server/domain/model"
+	"github.com/k-ueki/AGPlus/server/domain/query"
 )
 
 type (
@@ -12,8 +12,8 @@ type (
 	}
 )
 
-func (s *ClassGetService) List(perPage, page int) ([]*model.Class, error) {
-	classes, err := s.ClassGetRepository.FindAll(common.CalcPaginationStartAndFinPoint(perPage, page))
+func (s *ClassGetService) List(query *query.ListPaginationQuery) ([]*model.Class, error) {
+	classes, err := s.ClassGetRepository.FindAll(query)
 	if err != nil {
 		return nil, err
 	}

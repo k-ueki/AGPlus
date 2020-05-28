@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/k-ueki/AGPlus/server/adaptor/api/converter"
+
 	"github.com/k-ueki/AGPlus/server/adaptor/api/input"
 
 	"github.com/jinzhu/gorm"
@@ -37,7 +39,7 @@ func (c *ClassGetController) List(ctx *gin.Context) {
 		return
 	}
 
-	classes, err := c.ClassGetService.List(q.PerPage, q.Page)
+	classes, err := c.ClassGetService.List(converter.ConvertListClassParamToQuery(&q))
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return
