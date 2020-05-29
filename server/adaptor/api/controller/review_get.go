@@ -1,7 +1,9 @@
 package api
 
 import (
+	"errors"
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
@@ -20,6 +22,22 @@ func NewReviewGetController(db *gorm.DB) *ReviewGetController {
 
 func (c *ReviewGetController) List(ctx *gin.Context) {
 	reviews, err := c.ReviewGetService.List()
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError, err)
+		return
+	}
+	ctx.JSON(http.StatusOK, reviews)
+	return
+}
+
+func (c *ReviewGetController) Show(ctx *gin.Context) {
+	classID, err := strconv.Atoi(ctx.Param("id"))
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, errors.New("failed to get parameters"))
+		return
+	}
+
+	reviews, err := c.ReviewGetService.Show(classID)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, err)
 		return

@@ -9,6 +9,7 @@ type (
 		Attendance      int
 		TestsDifficulty int
 		Easiness        int
+		Comment         string
 	}
 
 	Evaluation struct {

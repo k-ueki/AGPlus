@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/k-ueki/AGPlus/server/domain/model"
+
 	"github.com/k-ueki/AGPlus/server/adaptor/api/input"
 
 	"github.com/gin-gonic/gin"
@@ -34,7 +36,13 @@ func (c *ReviewPostController) Store(ctx *gin.Context) {
 		return
 	}
 
-	err = c.ReviewPostService.Store(classID, &param)
+	//TODO:User認証
+	user := model.User{
+		ID:   1,
+		Name: "User1",
+	}
+
+	err = c.ReviewPostService.Store(classID, &user, &param)
 	if err != nil {
 		ctx.JSON(http.StatusInternalServerError, errors.New("failed to store"))
 		return

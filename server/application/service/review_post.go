@@ -11,27 +11,41 @@ import (
 
 type (
 	ReviewPostService interface {
-		Store(classID int, param *input.ReviewClassRequest) error
+		Store(classID int, user *model.User, param *input.ReviewClassRequest) error
 		Delete(id int) error
 	}
 
 	ReviewPostServiceImpl struct {
 		repository.ReviewPostRepository
+		repository.ReviewGetRepository
 	}
 )
 
 func NewReviewPostService(db *gorm.DB) ReviewPostService {
-	return &ReviewPostServiceImpl{impl.NewReviewPostRepository(db)}
+	return &ReviewPostServiceImpl{
+		impl.NewReviewPostRepository(db),
+		impl.NewReviewGetRepository(db),
+	}
 }
 
-func (s *ReviewPostServiceImpl) Store(classID int, param *input.ReviewClassRequest) error {
+func (s *ReviewPostServiceImpl) Store(classID int, user *model.User, param *input.ReviewClassRequest) error {
+	isExistReview, err := s.ReviewGetRepository.IsExist(user.ID, classID)
+	if err != nil {
+		return err
+	}
+	if isExistReview {
+		return errors.New("already posted")
+	}
+
 	if err := s.ReviewPostRepository.Store(&model.Review{
 		ClassID:         classID,
+		UserID:          user.ID,
 		Understanding:   param.Understanding,
 		Motivation:      param.Motivation,
 		Attendance:      param.Attendance,
 		TestsDifficulty: param.TestsDifficulty,
 		Easiness:        param.Easiness,
+		Comment:         param.Comment,
 	}); err != nil {
 		return errors.Wrap(err, "failed to store")
 	}

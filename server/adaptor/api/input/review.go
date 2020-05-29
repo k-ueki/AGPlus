@@ -10,10 +10,11 @@ type (
 		5. 楽単度
 	*/
 	ReviewClassRequest struct {
-		Understanding   int `query:"understanding" binding:"required"`
-		Motivation      int `query:"motivation" binding:"required"`
-		Attendance      int `query:"attendance" binding:"required"`
-		TestsDifficulty int `query:"testDifficulty" binding:"required"`
-		Easiness        int `query:"easiness" binding:"required"`
+		Understanding   int    `form:"understanding" binding:"required"`
+		Motivation      int    `form:"motivation" binding:"required"`
+		Attendance      int    `form:"attendance" binding:"required"`
+		TestsDifficulty int    `form:"testsDifficulty" binding:"required"`
+		Easiness        int    `form:"easiness" binding:"required"`
+		Comment         string `form:"comment"`
 	}
 )
