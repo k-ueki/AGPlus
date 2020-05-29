@@ -27,7 +27,7 @@ func NewReviewPostController(db *gorm.DB) *ReviewPostController {
 func (c *ReviewPostController) Store(ctx *gin.Context) {
 	classID, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to bind parameters"})
 		return
 	}
 	param := input.ReviewClassRequest{}
@@ -55,7 +55,7 @@ func (c *ReviewPostController) Store(ctx *gin.Context) {
 func (c *ReviewPostController) Delete(ctx *gin.Context) {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to bind parameters"})
 		return
 	}
 

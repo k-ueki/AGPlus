@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -33,7 +32,7 @@ func (c *ReviewGetController) List(ctx *gin.Context) {
 func (c *ReviewGetController) Show(ctx *gin.Context) {
 	classID, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to get parameters"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to get parameters"})
 		return
 	}
 

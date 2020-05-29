@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -28,7 +27,7 @@ func NewClassGetController(db *gorm.DB) *ClassGetController {
 func (c *ClassGetController) List(ctx *gin.Context) {
 	param := input.ListClass{}
 	if err := ctx.BindQuery(&param); err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to bind query"})
 		return
 	}
 
@@ -44,7 +43,7 @@ func (c *ClassGetController) List(ctx *gin.Context) {
 func (c *ClassGetController) Show(ctx *gin.Context) {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to bind parameters"})
 		return
 	}
 

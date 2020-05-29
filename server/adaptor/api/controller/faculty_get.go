@@ -1,7 +1,6 @@
 package api
 
 import (
-	"errors"
 	"net/http"
 	"strconv"
 
@@ -25,7 +24,7 @@ func NewFacultyGetController(db *gorm.DB) *FacultyGetController {
 func (c *FacultyGetController) ListFaculty(ctx *gin.Context) {
 	param := input.ListFacultyByCampusID{}
 	if err := ctx.BindQuery(&param); err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind query"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to bind query"})
 		return
 	}
 
@@ -41,7 +40,7 @@ func (c *FacultyGetController) ListFaculty(ctx *gin.Context) {
 func (c *FacultyGetController) ShowFaculty(ctx *gin.Context) {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to bind parameters"})
 		return
 	}
 
@@ -78,7 +77,7 @@ func (c *FacultyGetController) ListDepartment(ctx *gin.Context) {
 func (c *FacultyGetController) ShowDepartment(ctx *gin.Context) {
 	id, err := strconv.Atoi(ctx.Param("id"))
 	if err != nil {
-		ctx.JSON(http.StatusBadRequest, errors.New("failed to bind parameters"))
+		ctx.JSON(http.StatusBadRequest, gin.H{"messages": "failed to bind parameters"})
 		return
 	}
 
