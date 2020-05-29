@@ -125,7 +125,7 @@ func main() {
 			columnCount++
 
 			f := Faculty{}
-			if i <= 9 {
+			if i < 8 {
 				f = Faculty{
 					Name:         vv,
 					Type:         2,
