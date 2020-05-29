@@ -10,7 +10,7 @@ import (
 )
 
 type (
-	api struct {
+	Api struct {
 		DB *gorm.DB
 	}
 
@@ -19,7 +19,7 @@ type (
 	}
 )
 
-func (a *api) assertJSON(actual, data interface{}, t *testing.T) {
+func (a *Api) AssertJSON(actual, data interface{}, t *testing.T) {
 	act, err := json.Marshal(actual)
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when marshaling expected json data", err)
@@ -35,7 +35,7 @@ func (a *api) assertJSON(actual, data interface{}, t *testing.T) {
 	}
 }
 
-func connectNewTestMock(t *testing.T) (*gorm.DB, sqlmock.Sqlmock, error) {
+func ConnectNewTestMock(t *testing.T) (*gorm.DB, sqlmock.Sqlmock, error) {
 	db, mock, err := sqlmock.New()
 	if err != nil {
 		t.Fatalf("an error '%s' was not expected when opening a stub database connection", err)
