@@ -5,7 +5,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/k-ueki/AGPlus/server/adaptor/repository"
 	"github.com/k-ueki/AGPlus/server/application/service"
 )
 
@@ -16,13 +15,7 @@ type (
 )
 
 func NewReviewGetController(db *gorm.DB) *ReviewGetController {
-	return &ReviewGetController{
-		ReviewGetService: service.ReviewGetService{
-			ReviewGetRepository: repository.ReviewGetRepository{
-				DB: db,
-			},
-		},
-	}
+	return &ReviewGetController{service.NewReviewGetService(db)}
 }
 
 func (c *ReviewGetController) List(ctx *gin.Context) {

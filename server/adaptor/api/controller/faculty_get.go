@@ -9,7 +9,6 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"github.com/k-ueki/AGPlus/server/adaptor/repository"
 	"github.com/k-ueki/AGPlus/server/application/service"
 )
 
@@ -20,13 +19,7 @@ type (
 )
 
 func NewFacultyGetController(db *gorm.DB) *FacultyGetController {
-	return &FacultyGetController{
-		FacultyGetService: service.FacultyGetService{
-			FacultyGetRepository: repository.FacultyGetRepository{
-				DB: db,
-			},
-		},
-	}
+	return &FacultyGetController{service.NewFacultyGetServiceImpl(db)}
 }
 
 func (c *FacultyGetController) ListFaculty(ctx *gin.Context) {

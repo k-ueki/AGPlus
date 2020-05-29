@@ -1,19 +1,30 @@
 package service
 
 import (
+	"github.com/jinzhu/gorm"
 	"github.com/k-ueki/AGPlus/server/adaptor/api/input"
-	"github.com/k-ueki/AGPlus/server/adaptor/repository"
+	impl "github.com/k-ueki/AGPlus/server/adaptor/repository"
 	"github.com/k-ueki/AGPlus/server/domain/model"
+	"github.com/k-ueki/AGPlus/server/domain/repository"
 	"github.com/pkg/errors"
 )
 
 type (
-	ReviewPostService struct {
+	ReviewPostService interface {
+		Store(classID int, param *input.ReviewClassRequest) error
+		Delete(id int) error
+	}
+
+	ReviewPostServiceImpl struct {
 		repository.ReviewPostRepository
 	}
 )
 
-func (s *ReviewPostService) Store(classID int, param *input.ReviewClassRequest) error {
+func NewReviewPostService(db *gorm.DB) ReviewPostService {
+	return &ReviewPostServiceImpl{impl.NewReviewPostRepository(db)}
+}
+
+func (s *ReviewPostServiceImpl) Store(classID int, param *input.ReviewClassRequest) error {
 	if err := s.ReviewPostRepository.Store(&model.Review{
 		ClassID:         classID,
 		Understanding:   param.Understanding,
@@ -27,7 +38,7 @@ func (s *ReviewPostService) Store(classID int, param *input.ReviewClassRequest) 
 	return nil
 }
 
-func (s *ReviewPostService) Delete(id int) error {
+func (s *ReviewPostServiceImpl) Delete(id int) error {
 	if err := s.ReviewPostRepository.Delete(id); err != nil {
 		return errors.Wrap(err, "failed to delete")
 	}
