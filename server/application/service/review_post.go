@@ -4,14 +4,14 @@ import (
 	"github.com/jinzhu/gorm"
 	"github.com/k-ueki/AGPlus/server/adaptor/api/input"
 	impl "github.com/k-ueki/AGPlus/server/adaptor/repository"
-	"github.com/k-ueki/AGPlus/server/domain/model"
+	"github.com/k-ueki/AGPlus/server/domain/entity"
 	"github.com/k-ueki/AGPlus/server/domain/repository"
 	"github.com/pkg/errors"
 )
 
 type (
 	ReviewPostService interface {
-		Store(classID int, user *model.User, param *input.ReviewClassRequest) error
+		Store(classID int, user *entity.User, param *input.ReviewClassRequest) error
 		Delete(id int) error
 	}
 
@@ -28,7 +28,7 @@ func NewReviewPostService(db *gorm.DB) ReviewPostService {
 	}
 }
 
-func (s *ReviewPostServiceImpl) Store(classID int, user *model.User, param *input.ReviewClassRequest) error {
+func (s *ReviewPostServiceImpl) Store(classID int, user *entity.User, param *input.ReviewClassRequest) error {
 	isExistReview, err := s.ReviewGetRepository.IsExist(user.ID, classID)
 	if err != nil {
 		return err
@@ -37,7 +37,7 @@ func (s *ReviewPostServiceImpl) Store(classID int, user *model.User, param *inpu
 		return errors.New("already posted")
 	}
 
-	if err := s.ReviewPostRepository.Store(&model.Review{
+	if err := s.ReviewPostRepository.Store(&entity.Review{
 		ClassID:         classID,
 		UserID:          user.ID,
 		Understanding:   param.Understanding,

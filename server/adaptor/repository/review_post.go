@@ -3,7 +3,6 @@ package repository
 import (
 	"github.com/jinzhu/gorm"
 	"github.com/k-ueki/AGPlus/server/domain/entity"
-	"github.com/k-ueki/AGPlus/server/domain/model"
 	"github.com/k-ueki/AGPlus/server/domain/repository"
 	"github.com/pkg/errors"
 )
@@ -18,7 +17,7 @@ func NewReviewPostRepository(db *gorm.DB) repository.ReviewPostRepository {
 	return &ReviewPostRepositoryImpl{DB: db}
 }
 
-func (r *ReviewPostRepositoryImpl) Store(p *model.Review) error {
+func (r *ReviewPostRepositoryImpl) Store(p *entity.Review) error {
 	if err := r.DB.Save(p).Error; err != nil {
 		return errors.Wrap(err, "failed to insert review")
 	}

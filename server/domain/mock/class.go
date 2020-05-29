@@ -5,10 +5,11 @@
 package mock_repository
 
 import (
-	gomock "github.com/golang/mock/gomock"
-	model "github.com/k-ueki/AGPlus/server/domain/model"
-	query "github.com/k-ueki/AGPlus/server/domain/query"
-	reflect "reflect"
+	"reflect"
+
+	"github.com/golang/mock/gomock"
+	"github.com/k-ueki/AGPlus/server/domain/entity"
+	"github.com/k-ueki/AGPlus/server/domain/query"
 )
 
 // MockClassGetRepository is a mock of ClassGetRepository interface.
@@ -35,10 +36,10 @@ func (m *MockClassGetRepository) EXPECT() *MockClassGetRepositoryMockRecorder {
 }
 
 // FindAll mocks base method.
-func (m *MockClassGetRepository) FindAll(query *query.ListPaginationQuery) ([]*model.Class, error) {
+func (m *MockClassGetRepository) FindAll(query *query.ListPaginationQuery) ([]*entity.Class, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FindAll", query)
-	ret0, _ := ret[0].([]*model.Class)
+	ret0, _ := ret[0].([]*entity.Class)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }
@@ -50,10 +51,10 @@ func (mr *MockClassGetRepositoryMockRecorder) FindAll(query interface{}) *gomock
 }
 
 // FindByID mocks base method.
-func (m *MockClassGetRepository) FindByID(id int) (*model.Class, error) {
+func (m *MockClassGetRepository) FindByID(id int) (*entity.Class, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FindByID", id)
-	ret0, _ := ret[0].(*model.Class)
+	ret0, _ := ret[0].(*entity.Class)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

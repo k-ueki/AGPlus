@@ -4,11 +4,12 @@ import (
 	"reflect"
 	"testing"
 
+	"github.com/k-ueki/AGPlus/server/domain/entity"
+
 	"github.com/golang/mock/gomock"
 
 	mock_repository "github.com/k-ueki/AGPlus/server/domain/mock"
 
-	"github.com/k-ueki/AGPlus/server/domain/model"
 	"github.com/k-ueki/AGPlus/server/domain/query"
 )
 
@@ -20,7 +21,7 @@ func TestClassGetRepositoryImpl_FindAll(t *testing.T) {
 		name    string
 		args    args
 		mock    func(*mock_repository.MockClassGetRepository) *mock_repository.MockClassGetRepository
-		want    []*model.Class
+		want    []*entity.Class
 		wantErr bool
 	}{
 		{
@@ -35,7 +36,7 @@ func TestClassGetRepositoryImpl_FindAll(t *testing.T) {
 				rep.EXPECT().FindAll(&query.ListPaginationQuery{
 					Limit:  5,
 					Offset: 0,
-				}).Return([]*model.Class{
+				}).Return([]*entity.Class{
 					{
 						ID:          1,
 						Name:        "フレッシャーズ・セミナー",
@@ -72,7 +73,7 @@ func TestClassGetRepositoryImpl_FindAll(t *testing.T) {
 				}, nil)
 				return rep
 			},
-			want: []*model.Class{
+			want: []*entity.Class{
 				{
 					ID:          1,
 					Name:        "フレッシャーズ・セミナー",
@@ -138,7 +139,7 @@ func TestClassGetRepositoryImpl_FindByID(t *testing.T) {
 		name    string
 		args    args
 		mock    func(*mock_repository.MockClassGetRepository) *mock_repository.MockClassGetRepository
-		want    *model.Class
+		want    *entity.Class
 		wantErr bool
 	}{
 		{
@@ -147,7 +148,7 @@ func TestClassGetRepositoryImpl_FindByID(t *testing.T) {
 				1,
 			},
 			mock: func(rep *mock_repository.MockClassGetRepository) *mock_repository.MockClassGetRepository {
-				rep.EXPECT().FindByID(1).Return(&model.Class{
+				rep.EXPECT().FindByID(1).Return(&entity.Class{
 					ID:          1,
 					Name:        "フレッシャーズ・セミナー",
 					Semester:    "前期",
@@ -160,7 +161,7 @@ func TestClassGetRepositoryImpl_FindByID(t *testing.T) {
 				}, nil)
 				return rep
 			},
-			want: &model.Class{
+			want: &entity.Class{
 				ID:          1,
 				Name:        "フレッシャーズ・セミナー",
 				Semester:    "前期",

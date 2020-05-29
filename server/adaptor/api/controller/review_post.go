@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/k-ueki/AGPlus/server/domain/model"
+	"github.com/k-ueki/AGPlus/server/domain/entity"
 
 	"github.com/k-ueki/AGPlus/server/adaptor/api/input"
 
@@ -37,7 +37,7 @@ func (c *ReviewPostController) Store(ctx *gin.Context) {
 	}
 
 	//TODO:User認証
-	user := model.User{
+	user := entity.User{
 		ID:   1,
 		Name: "User1",
 	}

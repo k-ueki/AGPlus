@@ -3,15 +3,15 @@ package service
 import (
 	"github.com/jinzhu/gorm"
 	impl "github.com/k-ueki/AGPlus/server/adaptor/repository"
-	"github.com/k-ueki/AGPlus/server/domain/model"
+	"github.com/k-ueki/AGPlus/server/domain/entity"
 	"github.com/k-ueki/AGPlus/server/domain/query"
-	repository "github.com/k-ueki/AGPlus/server/domain/repository"
+	"github.com/k-ueki/AGPlus/server/domain/repository"
 )
 
 type (
 	ClassGetService interface {
-		List(query *query.ListPaginationQuery) ([]*model.Class, error)
-		Show(id int) (*model.Class, error)
+		List(query *query.ListPaginationQuery) ([]*entity.Class, error)
+		Show(id int) (*entity.Class, error)
 	}
 
 	ClassGetServiceImpl struct {
@@ -23,7 +23,7 @@ func NewClassGetService(db *gorm.DB) ClassGetService {
 	return &ClassGetServiceImpl{impl.NewClassGetRepository(db)}
 }
 
-func (s *ClassGetServiceImpl) List(query *query.ListPaginationQuery) ([]*model.Class, error) {
+func (s *ClassGetServiceImpl) List(query *query.ListPaginationQuery) ([]*entity.Class, error) {
 	classes, err := s.ClassGetRepository.FindAll(query)
 	if err != nil {
 		return nil, err
@@ -31,7 +31,7 @@ func (s *ClassGetServiceImpl) List(query *query.ListPaginationQuery) ([]*model.C
 	return classes, nil
 }
 
-func (s *ClassGetServiceImpl) Show(id int) (*model.Class, error) {
+func (s *ClassGetServiceImpl) Show(id int) (*entity.Class, error) {
 	class, err := s.ClassGetRepository.FindByID(id)
 	if err != nil {
 		return nil, err

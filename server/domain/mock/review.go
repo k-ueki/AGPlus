@@ -5,9 +5,10 @@
 package mock_repository
 
 import (
-	gomock "github.com/golang/mock/gomock"
-	model "github.com/k-ueki/AGPlus/server/domain/model"
-	reflect "reflect"
+	"reflect"
+
+	"github.com/golang/mock/gomock"
+	"github.com/k-ueki/AGPlus/server/domain/entity"
 )
 
 // MockReviewPostRepository is a mock of ReviewPostRepository interface.
@@ -34,7 +35,7 @@ func (m *MockReviewPostRepository) EXPECT() *MockReviewPostRepositoryMockRecorde
 }
 
 // Store mocks base method.
-func (m *MockReviewPostRepository) Store(p *model.Review) error {
+func (m *MockReviewPostRepository) Store(p *entity.Review) error {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "Store", p)
 	ret0, _ := ret[0].(error)
@@ -85,10 +86,10 @@ func (m *MockReviewGetRepository) EXPECT() *MockReviewGetRepositoryMockRecorder 
 }
 
 // FindAll mocks base method.
-func (m *MockReviewGetRepository) FindAll() ([]*model.Review, error) {
+func (m *MockReviewGetRepository) FindAll() ([]*entity.Review, error) {
 	m.ctrl.T.Helper()
 	ret := m.ctrl.Call(m, "FindAll")
-	ret0, _ := ret[0].([]*model.Review)
+	ret0, _ := ret[0].([]*entity.Review)
 	ret1, _ := ret[1].(error)
 	return ret0, ret1
 }

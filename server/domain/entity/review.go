@@ -1,7 +1,5 @@
 package entity
 
-import "github.com/k-ueki/AGPlus/server/domain/model"
-
 type (
 	Review struct {
 		ID              int
@@ -12,6 +10,7 @@ type (
 		Attendance      int
 		TestsDifficulty int
 		Easiness        int
+		Comment         string
 	}
 
 	Evaluation struct {
@@ -23,8 +22,8 @@ type (
 	}
 
 	ReviewInfo struct {
-		ReviewUser model.User
-		model.Class
+		ReviewUser User
+		Class
 		Review
 	}
 )
